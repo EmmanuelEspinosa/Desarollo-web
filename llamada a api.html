@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<button onclick=callPromise()> CALL</button>    
+</body>
+</html>
+<script>    
+/*console.log('This is the start')
+var p1= Promise.resolve(3)
+
+var p2=42
+var p3 = new Promise(function(resolve, reject){
+    setTimeout(resolve,2000,'This is promise 3')
+})
+
+console.log('This is one message')*/
+
+var url = "https://api.restful-api.dev/objects"
+
+
+var testPromiese = new Promise((resolve,reject)=>
+{
+   var request= new XMLHttpRequest()
+   request.open("GET", url)
+   request.responseType="json"
+   request.onload=()=>
+   {
+    if(request.status == 200)
+    {   
+    resolve(request.response)
+    }
+    else
+    {
+    reject('Oops!, error')
+    }
+   }
+   request.onerror = function(){
+       reject("error")
+   }
+   request.send()
+
+   
+})
+
+
+var a ="testString"
+
+function callPromise(){
+testPromiese.then(resolve =>{
+    console.log(resolve)
+    alert(resolve[0].name)
+})
+.catch(error =>{
+    console.log(error)
+    alert(error)
+})
+}
+
+
+
+
+
+</script>
